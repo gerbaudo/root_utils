@@ -46,12 +46,12 @@ class IndexedChain(r.TChain):
   '''
   def __iter__(self):
     for i in self.__index:
-    n=self.GetEntry(i)
-    if n == 0:
-      # nothing read, we're done. but probably shouldn't have gotten
-      # this far, if the indices are properly aligned.
-      print >> sys.stderr, "Warning! Index runs beyond data size. Breaking iteration."
-      break
+      n=self.GetEntry(i)
+      if n == 0:
+        # nothing read, we're done. but probably shouldn't have gotten
+        # this far, if the indices are properly aligned.
+        print >> sys.stderr, "Warning! Index runs beyond data size. Breaking iteration."
+        break
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser('barebones indexed tree demo')
