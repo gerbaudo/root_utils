@@ -261,8 +261,8 @@ class TestEntryList(unittest.TestCase) :
     chain.retrieve_entrylists([cut])
     chain.preselect(cut)
     n_entries_selected = chain.num_events_preselected()
-    for event in chain:
-      x = chain.x
+    for entry in chain:
+      x = entry.x
       pass_cut = eval(cutstring)
       if pass_cut:
         n_entries_passing +=1
