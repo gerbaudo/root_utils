@@ -1,4 +1,8 @@
-# indexed_chain
+# root_utils
+
+Some classes and functions I use when working with root
+
+## indexed_chain
 A TChain with selection indices
 
 The idea is that you run once on all events, and a TEntryList
