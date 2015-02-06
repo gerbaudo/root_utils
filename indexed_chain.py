@@ -101,7 +101,7 @@ class IndexedChain(r.TChain):
         self.logger.info("retrieved entry list for '%s' from '%s'" % (tcut.GetName(), fname))
       else:
         self.__has_entry_list[fname] = False
-        self.__entry_list[fname] = r.TEntryList(tcut.GetName(), self.string_to_hash(tcut))
+        self.__entry_list[fname] = r.TEntryList(tcut.GetName(), self.string_to_be_hashed(tcut))
         self.logger.info("creating entry list for '%s'" % tcut.GetName())
 
   def tcuts_with_existing_list(self):
@@ -186,20 +186,20 @@ class IndexedChain(r.TChain):
         os.remove(fname)
         self.logger.info("deleted existing entrylist for cut '%s' %s" % (tcut.GetName(), fname))
 
-  def string_to_hash(self, tcut):
+  def string_to_be_hashed(self, tcut):
     """
     Encode a given selection (cutname + cutexpression + filenames) in a string"
     """
     return ''.join([tcut.GetName(), tcut.GetTitle(), self.GetName()] +self.filenames)
 
   def hash(self, tcut):
-    return self.hash_func(self.string_to_hash(tcut)).hexdigest()
+    return self.hash_func(self.string_to_be_hashed(tcut)).hexdigest()
 
   def tcut_filename(self, tcut):
     """
     Given a TCut, provide the filename where the corresponding entry list is stored
     """
-    return os.path.join(self.cache_directory, self.hash(tcut)+'.root')
+    return os.path.join(self.cache_directory, tcut.GetName()+'_'+self.hash(tcut)+'.root')
 
 #
 # testing
