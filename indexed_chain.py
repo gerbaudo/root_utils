@@ -153,7 +153,8 @@ class IndexedChain(r.TChain):
     cache filenames so that we don't need to always call GetListOfFiles
     """
     if not hasattr(self, '_filenames'):
-      self._filenames = [f.GetName() for f in self.GetListOfFiles()]
+      nextkey = r.TIter(self.GetListOfFiles())
+      self._filenames = [f.GetTitle() for f in nextkey]
     return self._filenames
 
   def mkdir_if_needed(self, dirname):
